@@ -42,7 +42,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             if (EnemyFOV.CheckPlayerInVision(other.gameObject))
             {
-                OnAttackRange = Vector3.Distance(transform.position, other.transform.position) < AttackRange;
                 lastPlayerPosition = EnemyFOV.GetLastPlayerPosition(other.gameObject);
                 CheckEndingConditions();
             }
@@ -54,6 +53,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (collision.gameObject.CompareTag("Player"))
         {
             OnVisionRange = false;
+            OnAttackRange = false;
             CheckEndingConditions();
             if (HP < 100)
             {
@@ -64,6 +64,14 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if (target != null)
+        {
+            OnAttackRange = Vector3.Distance(transform.position, target.transform.position) < AttackRange;
+        }
+        else
+        {
+            OnAttackRange = false;
+        }
         currentState.OnStateUpdate(this);
     }
 
@@ -94,10 +102,11 @@ public class EnemyController : MonoBehaviour, IDamageable
         currentState = state;
         currentState.OnStateEnter(this);
     }
+
     public void TakeDamage(float damage)
     {
         HP -= (int)damage;
-        if (HP <= 25)
+        if (HP <= 50)
         {
             escape = true;
         }

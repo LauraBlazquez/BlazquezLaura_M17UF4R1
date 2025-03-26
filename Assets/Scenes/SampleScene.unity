@@ -481,6 +481,8 @@ MonoBehaviour:
   speed: 3.5
   sensitivity: 0.3
   cameraTransform: {fileID: 963194228}
+  enemy: {fileID: 2037201188}
+  damage: 25
 --- !u!143 &993089105
 CharacterController:
   m_ObjectHideFlags: 0
@@ -819,10 +821,10 @@ GameObject:
   - component: {fileID: 2037201190}
   - component: {fileID: 2037201189}
   - component: {fileID: 2037201194}
+  - component: {fileID: 2037201195}
   - component: {fileID: 2037201193}
   - component: {fileID: 2037201196}
   - component: {fileID: 2037201197}
-  - component: {fileID: 2037201195}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged

@@ -6,7 +6,7 @@ public class Die : StateSO
 {
     public override void OnStateEnter(EnemyController ec)
     {
-        //GameObject.Destroy(ec.gameObject);
+        GameObject.Destroy(ec.gameObject);
         Debug.Log("allahu akbar");
     }
 
