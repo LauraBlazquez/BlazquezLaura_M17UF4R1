@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, PlayerActions.IMovementActions, PlayerActions.ICameraControlActions
+public class PlayerController : MonoBehaviour, PlayerActions.IMovementActions, PlayerActions.ICameraControlActions, PlayerActions.IAttackActions
 {
     [Header("Movement Settings")]
     public float speed = 3f;
@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour, PlayerActions.IMovementActions, P
     [Header("Camera Settings")]
     public Transform cameraTransform;
 
+    [Header("Attack Settings")]
+    public GameObject enemy;
+    public float damage = 25f;
+
     private void Awake()
     {
         playerActions = new PlayerActions();
@@ -27,6 +31,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IMovementActions, P
     {
         playerActions.Movement.SetCallbacks(this);
         playerActions.CameraControl.SetCallbacks(this);
+        playerActions.Attack.SetCallbacks(this);
         playerActions.Enable();
     }
 
@@ -60,8 +65,16 @@ public class PlayerController : MonoBehaviour, PlayerActions.IMovementActions, P
     private void LookAround()
     {
         rotationX -= lookInput.y * sensitivity;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f); // Evita girar más de 90° arriba/abajo
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
         cameraTransform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
         transform.Rotate(Vector3.up * lookInput.x * sensitivity);
+    }
+
+    public void OnPunch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            enemy.GetComponent<EnemyController>().TakeDamage(damage);
+        }
     }
 }

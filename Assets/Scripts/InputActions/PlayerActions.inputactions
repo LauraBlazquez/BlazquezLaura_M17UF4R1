@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "PlayerActions",
     "maps": [
         {
             "name": "Movement",
@@ -96,6 +96,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Attack",
+            "id": "1810cc33-92bf-4bd7-b484-462f466379b5",
+            "actions": [
+                {
+                    "name": "Punch",
+                    "type": "Button",
+                    "id": "43d73a08-c6a7-45d8-bbae-3f36f543fd64",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "36919b32-0a50-4e3f-a128-5c90382b1556",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Punch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
