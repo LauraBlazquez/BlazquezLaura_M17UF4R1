@@ -7,7 +7,7 @@ public class EscapeCondition : ConditionSO
 {
     public override bool CheckCondition(EnemyController ec)
     {
-        if (ec.HP <= 25)
+        if (ec.HP <= 50)
         {
             return ec.escape == true;
         }
