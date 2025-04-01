@@ -1,6 +1,7 @@
 # Survival AI
 
 Este repositorio contiene una práctica en la que se implementa una IA básica para el comportamiento de los enemigos.
+También tenemos una mascota que nos acompaña y se alegra de vernos :)
 
 ## Controles
 
