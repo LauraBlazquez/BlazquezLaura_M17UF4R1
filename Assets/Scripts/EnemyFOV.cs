@@ -22,7 +22,6 @@ public class EnemyFOV : MonoBehaviour
                 }
             }
         }
-
         return false;
     }
 
@@ -42,7 +41,6 @@ public class EnemyFOV : MonoBehaviour
                 }
             }
         }
-
         return Vector3.zero;
     }
 }

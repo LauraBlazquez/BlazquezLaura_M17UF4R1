@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IMovementActions, P
 
     [Header("Camera Settings")]
     public Transform cameraTransform;
+    public GameObject pet;
 
     [Header("Attack Settings")]
     public GameObject enemy;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IMovementActions, P
     {
         Move();
         LookAround();
+        GetComponent<PlayerFOV>().CheckPetInVision(pet);
     }
 
     public void OnWalk(InputAction.CallbackContext context)

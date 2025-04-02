@@ -1,24 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
 public class PetController : MonoBehaviour
 {
-    public GameObject target;
-    public bool OnVisionRange = false;
-    public StateSO currentState;
-    public List<StateSO> States;
+    public PetStateSO currentState;
+    public List<PetStateSO> States;
+    public bool ImOnVisionRange;
 
-    void Start()
+    private void Update()
     {
-
+        currentState.OnStateUpdate(this);
     }
 
     public void CheckEndingConditions()
     {
-        foreach (ConditionSO condition in currentState.EndConditions)
+        foreach (PetConditionSO condition in currentState.EndConditions)
         {
             if (condition.CheckCondition(this) == condition.answer) ExitCurrentNode();
         }
@@ -26,7 +26,7 @@ public class PetController : MonoBehaviour
 
     public void ExitCurrentNode()
     {
-        foreach (StateSO stateSO in States)
+        foreach (PetStateSO stateSO in States)
         {
             if (stateSO.StartCondition == null || stateSO.StartCondition.CheckCondition(this) == stateSO.StartCondition.answer)
             {
@@ -37,7 +37,7 @@ public class PetController : MonoBehaviour
         currentState.OnStateEnter(this);
     }
 
-    private void EnterNewState(StateSO state)
+    private void EnterNewState(PetStateSO state)
     {
         currentState.OnStateExit(this);
         currentState = state;

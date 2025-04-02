@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "Escape", menuName = "StatesSO/Escape")]
-public class Escape : StateSO
+public class Escape : EnemyStateSO
 {
     public override void OnStateEnter(EnemyController ec)
     {
