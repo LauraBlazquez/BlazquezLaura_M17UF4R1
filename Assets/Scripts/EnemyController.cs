@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     public GameObject target;
     public bool OnVisionRange = false, OnAttackRange = false, escape = false;
     public EnemyPathFinding _chaseB;
-    public StateSO currentState;
-    public List<StateSO> States;
+    public EnemyStateSO currentState;
+    public List<EnemyStateSO> States;
     public float AttackRange = 2f;
     public Vector3 lastPlayerPosition;
     public EnemyFOV EnemyFOV;
@@ -77,7 +77,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void CheckEndingConditions()
     {
-        foreach (ConditionSO condition in currentState.EndConditions)
+        foreach (EnemyConditionSO condition in currentState.EndConditions)
         {
             if (condition.CheckCondition(this) == condition.answer) ExitCurrentNode();
         }
@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void ExitCurrentNode()
     {
-        foreach (StateSO stateSO in States)
+        foreach (EnemyStateSO stateSO in States)
         {
             if (stateSO.StartCondition == null || stateSO.StartCondition.CheckCondition(this) == stateSO.StartCondition.answer)
             {
@@ -96,7 +96,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         currentState.OnStateEnter(this);
     }
 
-    private void EnterNewState(StateSO state)
+    private void EnterNewState(EnemyStateSO state)
     {
         currentState.OnStateExit(this);
         currentState = state;

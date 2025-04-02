@@ -5,15 +5,14 @@ using UnityEngine;
 public class PlayerFOV : MonoBehaviour
 {
     public float fov = 100f;
-    public GameObject pet;
-    public bool petInVision;
+    private PetController pc;
 
-    private void Update()
+    private void Awake()
     {
-        petInVision = CheckPetInVision(pet);
+        pc = GameObject.Find("Pet").GetComponent<PetController>();
     }
 
-    public bool CheckPetInVision(GameObject pet)
+    public void CheckPetInVision(GameObject pet)
     {
         Vector3 direction = pet.transform.position - transform.position;
         float angle = Vector3.Angle(direction, transform.forward);
@@ -23,12 +22,20 @@ public class PlayerFOV : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direction, out hit))
             {
-                if (hit.collider.gameObject == pet)
+                if (hit.collider.name == "Pet")
                 {
-                    return true;
+                    pc.ImOnVisionRange = true;
+                    pc.CheckEndingConditions();
                 }
             }
         }
-        return false;
+        else
+        {
+            if (pc.ImOnVisionRange)
+            {
+                pc.ImOnVisionRange = false;
+                pc.CheckEndingConditions();
+            }
+        }
     }
 }

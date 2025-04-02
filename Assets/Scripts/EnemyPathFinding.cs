@@ -34,7 +34,6 @@ public class EnemyPathFinding : MonoBehaviour
     }
     public void Chase()
     {
-        StopAllCoroutines();
         agent.SetDestination(target.transform.position);
     }
 
